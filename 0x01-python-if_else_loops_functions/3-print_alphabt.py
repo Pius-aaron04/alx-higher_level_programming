@@ -1,4 +1,4 @@
 #!/usr/bin/python3
 for character in range(97, 123):
     if chr(character) not in 'qe':
-        print(chr(character), end='')
+        print("{}".format(chr(character)), end='')
