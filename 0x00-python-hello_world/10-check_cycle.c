@@ -2,6 +2,7 @@
  * check_cycle - checks for cycle in a linked list
  * @list: list to check
  * Return: 0 if none found otherwise 1
+ */
 #include "lists.h"
 
 int check_cycle(listint_t *list) 
