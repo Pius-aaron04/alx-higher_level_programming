@@ -10,14 +10,12 @@ int is_palindrome(listint_t **head)
 {
 	listint_t *fast = *head, *prev;
 	listint_t *slow = *head, *second_half, *current;
-	int i = 0;
 
 	if (*head == NULL || (*head)->next == NULL)
 		return (1);
-	while (fast)
+	while (fast != NULL && fast->next != NULL)
 	{
 		slow = slow->next;
-		i++;
 		fast = fast->next->next;
 	}
 	second_half = NULL;
