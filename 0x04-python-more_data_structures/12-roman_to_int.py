@@ -10,7 +10,7 @@ def roman_to_int(roman_string):
         integer form of numeral
     """
     if not roman_string:
-        return None
+        return 0
     roman_rep = {
             'I': 1,
             'V': 5,
