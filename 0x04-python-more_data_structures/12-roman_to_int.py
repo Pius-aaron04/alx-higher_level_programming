@@ -25,7 +25,7 @@ def roman_to_int(roman_string):
         val = roman_rep.get(letter)
         x = i - 1
         if not val:
-            return
+            return integer
         if not x < 0 and val > roman_rep.get(roman_string[x]):
             integer += val - (2 * roman_rep.get(roman_string[x]))
         else:
