@@ -9,6 +9,8 @@ def roman_to_int(roman_string):
     Return Values:
         integer form of numeral
     """
+    if not roman_string:
+        return None
     roman_rep = {
             'I': 1,
             'V': 5,
