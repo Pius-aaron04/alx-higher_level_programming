@@ -9,4 +9,3 @@ matrix = [
 new_matrix = square_matrix_simple(matrix)
 print(matrix)
 print(new_matrix)
-print(square_matrix_simple([]))
