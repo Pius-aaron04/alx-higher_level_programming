@@ -9,7 +9,7 @@ def roman_to_int(roman_string):
     Return Values:
         integer form of numeral
     """
-    if not roman_string:
+    if not roman_string or type(roman_string) != str:
         return 0
     roman_rep = {
             'I': 1,
