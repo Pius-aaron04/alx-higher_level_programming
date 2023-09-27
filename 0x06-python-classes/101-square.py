@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-#!/usr/bin/python3
 """ This module contains the definition of a Square Class with size."""
 
 
@@ -53,10 +52,10 @@ class Square:
             return
         if self.position[1] > 1:
             if self.position[1] % 2 == 0:
-                y1 = self.position[1] / 2
+                y1 = self.position[1] // 2
                 y2 = y1
             else:
-                y1 = (self.position[1] / 2) + 1
+                y1 = (self.position[1] // 2) + 1
                 y2 = y1 - 1
         else:
             y1 = self.position[1]
@@ -87,7 +86,7 @@ class Square:
                                                  position):
             raise TypeError("position must be a tuple of 2 positive integers")
         self.__position = position
-    
+
     def __repr__(self) -> str:
         """
         string representation of Square instance.
@@ -95,11 +94,10 @@ class Square:
 
         rep = ""
         if self.size == 0:
-            rep += "\n"
             return rep
         if self.position[1] > 1:
             if self.position[1] % 2 == 0:
-                y1 = self.position[1] / 2
+                y1 = self.position[1] // 2
                 y2 = y1
             else:
                 y1 = (self.position[1] // 2) + 1
