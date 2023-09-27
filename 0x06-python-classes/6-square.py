@@ -58,9 +58,9 @@ class Square:
             for j in range(self.size):
                 print('#', end='')
             print()
-        if not self.position[1] > 1:
-            for k in range(self.position[1]):
-                print()
+        # if not self.position[1] > 1:
+        #     for k in range(self.position[1]):
+        #         print()
 
     @property
     def position(self):
