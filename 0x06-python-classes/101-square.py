@@ -51,14 +51,24 @@ class Square:
         if self.size == 0:
             print()
             return
-        for k in range(self.position[1]):
+        if self.position[1] > 1:
+            if self.position[1] % 2 == 0:
+                y1 = self.position[1] / 2
+                y2 = y1
+            else:
+                y1 = (self.position[1] / 2) + 1
+                y2 = y1 - 1
+        else:
+            y1 = self.position[1]
+            y2 = 0
+        for k in range(y1):
             print()
         for i in range(self.size):
             print(' ' * self.position[0], end='')
             for j in range(self.size):
                 print('#', end='')
             print()
-        for k in range(self.position[1]):
+        for k in range(y2):
             print()
 
     @property
@@ -77,3 +87,33 @@ class Square:
                                                  position):
             raise TypeError("position must be a tuple of 2 positive integers")
         self.__position = position
+    
+    def __repr__(self) -> str:
+        """
+        string representation of Square instance.
+        """
+
+        rep = ""
+        if self.size == 0:
+            rep += "\n"
+            return rep
+        if self.position[1] > 1:
+            if self.position[1] % 2 == 0:
+                y1 = self.position[1] / 2
+                y2 = y1
+            else:
+                y1 = (self.position[1] // 2) + 1
+                y2 = y1 - 1
+        else:
+            y1 = self.position[1]
+            y2 = 0
+        for k in range(y1):
+            rep += '\n'
+        for i in range(self.size):
+            rep += ' ' * self.position[0]
+            for j in range(self.size):
+                rep += '#'
+            rep += '\n'
+        for k in range(y2):
+            rep += '\n'
+        return rep[:-1]
