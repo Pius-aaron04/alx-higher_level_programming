@@ -8,7 +8,7 @@ class Square:
         """ Initializes private size attribute for Square ininstance."""
 
         if type(size) is not int:
-            raise TypeError("size must be integer")
+            raise TypeError("size must be an integer")
         elif size < 0:
             raise ValueError("size must >= 0")
         self.__size = size
@@ -17,7 +17,8 @@ class Square:
             raise TypeError("position must be a tuple of 2 positive integers")
         elif len(position) != 2:
             raise TypeError("position must be a tuple of 2 positive integers")
-        elif any(x < 0 for x in position):
+        elif any(x < 0 for x in position) or any(type(x) is not int for
+        x in position):
             raise TypeError("position must be a tuple of 2 positive integers")
         self.__position = position
 
@@ -46,6 +47,8 @@ class Square:
         """ Prints instance image."""
 
         if self.size == 0:
+            print()
+        for k in range(self.position[1]):
             print()
         for i in range(self.size):
             print(' ' * self.position[0], end='')
