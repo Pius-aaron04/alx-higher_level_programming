@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+#!/usr/bin/python3
 """ This module contains the definition of a Square Class with size."""
 
 
@@ -50,9 +51,8 @@ class Square:
         if self.size == 0:
             print()
             return
-        if not self.position[1] > 1:
-            for k in range(self.position[1]):
-                print()
+        for k in range(self.position[1]):
+            print()
         for i in range(self.size):
             print(' ' * self.position[0], end='')
             for j in range(self.size):
