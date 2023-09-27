@@ -58,6 +58,8 @@ class Square:
             for j in range(self.size):
                 print('#', end='')
             print()
+        for k in range(self.position[1]):
+            print()
 
     @property
     def position(self):
