@@ -9,6 +9,8 @@ class Rectangle:
     This defines a Rectangle class.
     """
 
+    number_of_instances = 0
+
     def __init__(self, width=0, height=0):
         """
         initializes instance attributes.
@@ -24,6 +26,7 @@ class Rectangle:
             raise ValueError("height must be >= 0")
         self.__width = width
         self.__height = height
+        Rectangle.number_of_instances += 1
 
     @property
     def height(self):
@@ -43,7 +46,7 @@ class Rectangle:
             raise TypeError("height must be an integer")
         elif height < 0:
             raise ValueError("height must be >= 0")
-        self.__height == height
+        self.__height = height
 
     @property
     def width(self):
@@ -64,3 +67,52 @@ class Rectangle:
         elif width < 0:
             raise ValueError("width must be >= 0")
         self.__width = width
+
+    def area(self):
+        """
+        gets the area of rectangle instance.
+        """
+
+        return self.height * self.width
+
+    def perimeter(self):
+        """
+        gets the perimeter of rectangle.
+        """
+
+        if self.width == 0 or self.height == 0:
+            return 0
+        return (self.width + self.height) * 2
+
+    def __str__(self):
+        """
+        returns string representation of instance
+        """
+
+        if self.width == 0 or self.height == 0:
+            return ""
+
+        string = ""
+        for row in range(self.height):
+            string += ("#" * self.width)
+            if row != self.height - 1:
+                string += '\n'
+
+        return string
+
+    def __repr__(self):
+        """
+        returns string representation of instance
+        """
+
+        string = "Rectangle({}, {})".format(self.width, self.height)
+
+        return string
+
+    def __del__(self):
+        """
+        detects deletion of instance.
+        """
+
+        print("Bye rectangle...")
+        Rectangle.number_of_instances -= 1

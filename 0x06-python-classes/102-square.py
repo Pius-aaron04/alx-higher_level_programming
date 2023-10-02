@@ -36,20 +36,24 @@ class Square:
 
     def __eq__(self, other):
         """Does th equal comaparison"""
-        return self.size == other.size
+        return self == other
 
     def __lt__(self, other):
         """Does the less than comaparison"""
-        return self.size < other.size
+        return eval(self) < eval(other)
 
     def __le__(self, other):
         """Does the less than or equal comaparison"""
-        return self.size <= other.size
+        return self <= other
 
     def __gt__(self, other):
         """Does the greater than comaparison"""
-        return self.size > other.size
+        return self > other
 
     def __ge__(self, other):
         """Does the great than and equal to"""
-        return self.sizei >= other.size
+        return self >= other
+
+    def __repr__(self):
+        """ String rep of instance """
+        return "{}".format(self.area)
