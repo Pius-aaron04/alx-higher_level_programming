@@ -1,0 +1,30 @@
+>>> text_indentation = __import__('5-text_indentation').text_indentation
+>>> text_indentation("Hello World! ")
+Hello World!
+>>> text_indentation("      Plenty things dey my mind, but how?             ")
+Plenty things dey my mind, but how?
+<BLANKLINE>
+>>> text_indentation("John said,\n  'Hello.'")
+John said,
+'Hello.
+<BLANKLINE>
+'
+>>> text_indentation("      Plenty things dey my mind, but how      ?")
+Plenty things dey my mind, but how      ?
+<BLANKLINE>
+>>> try:
+...	text_indentation(18395)
+... except Exception as e:
+...	print(e)
+text must be a string
+>>> try:
+...	text_indentation(['Hello', 'world'])
+... except Exception as e:
+...	print(e)
+text must be a string
+>>> text_indentation("Please save some money.       yes save.some \tmoney")
+Please save some money.
+<BLANKLINE>
+yes save.
+<BLANKLINE>
+some 	money
