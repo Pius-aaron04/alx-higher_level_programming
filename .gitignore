@@ -1,2 +1,5 @@
-~
-.swp
+*~
+*.swp
+__*
+tests/
+*main.py

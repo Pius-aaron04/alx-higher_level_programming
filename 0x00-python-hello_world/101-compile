@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Get the Python script filename from the command-line argument
+echo "Compiling $PYFILE ..."
+
+# Check if the Python script file exists
+if [ ! -f "$PYFILE" ]; then
+    echo "Error: The file '$python_script' does not exist."
+    exit 1
+fi
+
+# Compile the Python script using the compile function
+compiled_script="${PYFILE}c"
+python3 -c "import py_compile; py_compile.compile('$PYFILE', cfile='$compiled_script')"
+chmod a+x $compiled_script
+
+# Check if the compilation was successful
+# if [ $? -eq 0 ]; then
+#    echo "Compilation successful. Compiled script saved as '$compiled_script'."
+# else
+#    echo "Compilation failed."
+# fi
