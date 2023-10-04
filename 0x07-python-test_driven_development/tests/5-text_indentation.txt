@@ -1,8 +1,8 @@
 >>> text_indentation = __import__('5-text_indentation').text_indentation
 >>> text_indentation("Hello World! ")
 Hello World!
->>> text_indentation("      Plenty things dey my mind, but how      ?")
-Plenty things dey my mind, but how      ?
+>>> text_indentation("      Plenty things dey my mind, but how?   ")
+Plenty things dey my mind, but how?
 <BLANKLINE>
 >>> try:
 ...	text_indentation(18395)
