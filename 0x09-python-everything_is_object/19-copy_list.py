@@ -4,9 +4,9 @@ defines a list that returns a copied list
 """
 
 
-def copy_list(l):
+def copy_list(lis):
     """
     returns l copy
     """
 
-    return l[:]
+    return lis[:]

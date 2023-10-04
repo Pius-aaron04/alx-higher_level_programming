@@ -28,3 +28,7 @@ Please save some money.
 yes save.
 <BLANKLINE>
 some 	money
+>>> text_indentation(str({'Hello': 'World'}))
+{'Hello':
+<BLANKLINE>
+'World'}

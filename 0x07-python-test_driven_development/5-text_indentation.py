@@ -14,15 +14,18 @@ def text_indentation(text):
         raise TypeError("text must be a string")
     start = 0
     end = len(text)
+
+    # gets rid of leading and trailing white spaces
     while text[start] in (' ', '\t'):
         start += 1
     while text[end - 1] in (' ', '\t'):
         end -= 1
+
     for i in range(start, end):
         if text[i] in ('.', '?', ':'):
             print(text[i])
             print()
         else:
-            if text[i - 1] in '.?:\n\t ' and text[i] == ' ':
+            if text[i - 1] in '.?:\n ' and text[i] in ' \t':
                 continue
             print(text[i], end='')
