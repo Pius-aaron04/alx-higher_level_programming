@@ -40,4 +40,4 @@ Traceback (most recent call last):
 ...
 ZeroDivisionError: division by zero
 >>> matrix_divided([[0, 0, 0, 0], [0, 0, 0, 0]], 2)
-[[0, 0, 0, 0], [0, 0, 0, 0]]
+[[0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0]]
