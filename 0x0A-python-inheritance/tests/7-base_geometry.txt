@@ -7,10 +7,10 @@ ValueError: value must be greater than 0
 Traceback (most recent call last):
 ...
 ValueError: value must be greater than 0
->>> bg.integer_validator("value", 0)
+>>> bg.integer_validator("value", (0, 2, 5))
 Traceback (most recent call last):
 ...
-ValueError: value must be greater than 0
+TypeError: value must be an integer
 >>> bg.integer_validator("size", "size")
 Traceback (most recent call last):
 ...
@@ -33,3 +33,9 @@ TypeError: integer_validator() missing 1 required positional argument: 'value'
 Traceback (most recent call last):
 ...
 TypeError: temp must be an integer
+>>> bg.integer_validator("temp", {})
+Traceback (most recent call last):
+...
+TypeError: temp must be an integer
+>>> bg.integer_validator([], 10)
+>>> bg.integer_validator({}, 20)
