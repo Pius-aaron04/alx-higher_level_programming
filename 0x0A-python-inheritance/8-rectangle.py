@@ -1,4 +1,4 @@
-#!/usr/binpython3
+#!/usr/bin/python3
 """
 conatains rectangle class definition.
 """
