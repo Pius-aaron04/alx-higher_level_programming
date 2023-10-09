@@ -1,0 +1,35 @@
+>>> bg = __import__('7-base_geometry').BaseGeometry()
+>>> bg.integer_validator("value", -10)
+Traceback (most recent call last):
+...
+ValueError: value must be greater than 0
+>>> bg.integer_validator("value", 0)
+Traceback (most recent call last):
+...
+ValueError: value must be greater than 0
+>>> bg.integer_validator("value", 0)
+Traceback (most recent call last):
+...
+ValueError: value must be greater than 0
+>>> bg.integer_validator("size", "size")
+Traceback (most recent call last):
+...
+TypeError: size must be an integer
+>>> bg.integer_validator("width", [1, 35, 4])
+Traceback (most recent call last):
+...
+TypeError: width must be an integer
+>>> bg.integer_validator()
+Traceback (most recent call last):
+...
+TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
+>>> bg.integer_validator("hello")
+Traceback (most recent call last):
+...
+TypeError: integer_validator() missing 1 required positional argument: 'value'
+>>> bg.integer_validator("diagonal", 10)
+>>> bg.integer_validator("angle", 180)
+>>> bg.integer_validator("temp", 10.40)
+Traceback (most recent call last):
+...
+TypeError: temp must be an integer
