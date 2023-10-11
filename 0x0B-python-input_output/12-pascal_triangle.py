@@ -11,8 +11,7 @@ def pascal_triangle(n):
 
     if n <= 0:
         return []
-    triangle = [[1 for k in range(i)] for i in range(n + 1)]
-    triangle.pop(0)
+    triangle = [[1 for k in range(i)] for i in range(1, n + 1)]
     # creates a triangle of 1s
     for i, exp in enumerate(triangle):
         if i < 2:  # skips the first lists in triangle

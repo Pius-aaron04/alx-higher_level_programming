@@ -39,4 +39,5 @@ class Student:
         updates instance attributes with json object.
         """
 
-        self.__dict__ = json
+        if json:
+            self.__dict__ = json

@@ -25,7 +25,7 @@ class Student:
 
         if attrs is None:
             return self.__dict__
-        elif type(attrs) is list and attrs:
+        elif type(attrs) is list:
             new_dict = {}
             for name in attrs:
                 if name in self.__dict__:
