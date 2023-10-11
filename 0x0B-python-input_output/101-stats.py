@@ -25,5 +25,6 @@ for line in sys.stdin:
 
     if lines % 10 == 0:
         print("File size: {}".format(total_file_size))
-        for key, value in status_codes.items():
-            print("{}: {}".format(key, value))
+        for key, value in sorted(status_codes.items()):
+            if value != 0:
+                print("{}: {}".format(key, value))
