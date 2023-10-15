@@ -16,22 +16,10 @@ class Rectangle(Base):
         intializes instance varaibles.
         """
 
-        if type(width) is not int:
-            raise TypeError("width must be an intger")
-        elif width <= 0:
-            raise ValueError("width must be > 0")
-        elif type(height) is not int:
-            raise TypeError("height must be an integer")
-        elif height <= 0:
-            raise ValueError("height must be > 0")
-        elif type(x) is not int:
-            raise TypeError("x must be an integer")
-        elif x < 0:
-            raise ValueError("x must be >= 0")
-        elif type(y) is not int:
-            raise TypeError("y must be an integer")
-        elif y < 0:
-            raise ValueError("y must be >= 0")
+        self.validate_value('width', width)
+        self.validate_value('height', height)
+        self.validate_value('x', x)
+        self.validate_value('y', y)
         self.__x = x
         self.__y = y
         self.__width = width
@@ -52,10 +40,7 @@ class Rectangle(Base):
         sets width.
         """
 
-        if type(width) is not int:
-            raise TypeError("width must be an intger")
-        elif width <= 0:
-            raise ValueError("width must be > 0")
+        super().validate_value('width', width)
         self.__width = width
 
     @property
@@ -72,10 +57,7 @@ class Rectangle(Base):
         sets height.
         """
 
-        if type(height) is not int:
-            raise TypeError("height must be an intger")
-        elif height <= 0:
-            raise ValueError("height must be > 0")
+        self.validate_value('height', height)
         self.__height = height
 
     @property
@@ -92,10 +74,7 @@ class Rectangle(Base):
         sets x ordinate
         """
 
-        if type(x) is not int:
-            raise TypeError("x must be an intger")
-        elif x < 0:
-            raise ValueError("x must be > 0")
+        self.validate_value('x', x)
         self.__x = x
 
     @property
@@ -112,10 +91,7 @@ class Rectangle(Base):
         sets y ordinate
         """
 
-        if type(y) is not int:
-            raise TypeError("y must be an intger")
-        elif y < 0:
-            raise ValueError("y must be > 0")
+        self.validate_value('y', y)
         self.__y = y
 
     def area(self):
@@ -127,7 +103,7 @@ class Rectangle(Base):
 
     def display(self):
         """
-        Displays rectangle object inform 
+        Displays rectangle object inform
         of '#' accoreding to its size(width, height).
         """
 
@@ -149,3 +125,27 @@ class Rectangle(Base):
                                                          self.y, self.width,
                                                          self.height)
         return string
+
+    def update(self, *args, **kwargs):
+        """
+        updates instances attributes.
+        """
+
+        if args:
+            try:
+                self.id = args[0]
+                self.width = args[1]
+                self.height = args[2]
+                self.x = args[3]
+                self.y = args[4]
+            except Exception:
+                return
+        else:
+            for key, value in kwargs.items():
+                if key != 'id':
+                    s_key = '_Rectangle__' + key
+                else:
+                    s_key = key
+                if s_key in self.__dict__:
+                    self.validate_value(key, value)
+                    setattr(self, s_key, value)

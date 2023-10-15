@@ -5,9 +5,7 @@ contains test case for rectangle class
 import unittest
 from unittest.mock import patch
 import io
-from models import rectangle
-
-Rectangle = rectangle.Rectangle
+from models.rectangle import Rectangle
 
 
 class TestClassRectangle(unittest.TestCase):
@@ -21,18 +19,36 @@ class TestClassRectangle(unittest.TestCase):
         types
         """
 
-        with self.assertRaises(TypeError):
+        with self.assertRaisesRegex(TypeError, 'width must be an integer'):
             rect = Rectangle("2", 5)
-        with self.assertRaises(TypeError):
+        with self.assertRaisesRegex(TypeError, 'height must be an integer'):
             rect1 = Rectangle(3, "3")
-        with self.assertRaises(TypeError):
+        with self.assertRaisesRegex(TypeError, 'width must be an integer'):
             rect = Rectangle([1, 3], (1, 2, 3))
-        with self.assertRaises(TypeError):
+        with self.assertRaisesRegex(TypeError, 'x must be an integer'):
             rect = Rectangle(1, 4, "2")
-        with self.assertRaises(TypeError):
+        with self.assertRaisesRegex(TypeError, 'y must be an integer'):
             rect = Rectangle(1, 2, 2, [5])
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, 'width must be > 0'):
             rect = Rectangle(-2, 5)
+
+    def test_rectangle_inst_constr_val(self):
+        """
+        test Rectangle instances for value Errors.
+        """
+
+        with self.assertRaisesRegex(ValueError, 'width must be > 0'):
+            r = Rectangle(-2, 5)
+        with self.assertRaisesRegex(ValueError, 'width must be > 0'):
+            r = Rectangle(0, 5)
+        with self.assertRaisesRegex(ValueError, 'height must be > 0'):
+            r = Rectangle(2, -5)
+        with self.assertRaisesRegex(ValueError, 'height must be > 0'):
+            r = Rectangle(1, 0)
+        with self.assertRaisesRegex(ValueError, 'x must be >= 0'):
+            r = Rectangle(2, 5, -45)
+        with self.assertRaisesRegex(ValueError, 'y must be >= 0'):
+            r = Rectangle(2, 5, 4, -7)
 
     def test_rectangle_attr_get(self):
         """
@@ -250,3 +266,87 @@ class TestClassRectangle(unittest.TestCase):
 
         self.assertEqual(captured, "\n\n\n##\n" +
                          "##\n##\n")
+
+    def test_rectangle_update_method(self):
+        """
+        tests the update method.
+        """
+
+        rect = Rectangle(2, 5, 7, 8, 89)
+        rect.update(3)
+        self.assertEqual(rect.id, 3)
+        rect.update(4, 5)
+        self.assertEqual(rect.id, 4)
+        self.assertEqual(rect.width, 5)
+        self.assertEqual(rect.height, 5)
+        rect.update(4, 5, 2)
+        self.assertEqual(rect.height, 2)
+        rect.update(4, 5, 2, 9)
+        self.assertEqual(rect.x, 9)
+        rect.update(4, 5, 2, 9, 10)
+        self.assertEqual(rect.y, 10)
+
+    def test_update_method_with_kwargs(self):
+        """
+        test rectangle instance update method with args and kwargs.
+        """
+
+        rec = Rectangle(2, 3)
+        # only keywords arguments provided
+        rec.update(id=10, width=1, height=1)
+        self.assertEqual(rec.id, 10)
+        self.assertEqual(rec.width, 1)
+        self.assertEqual(rec.height, 1)
+
+        # keyword arguments with positional arguments
+        rec.update(2, 3, 4, y=9, x=2)
+        self.assertEqual(rec.x, 0)
+        self.assertEqual(rec.y, 0)
+        self.assertEqual(rec.id, 2)
+        self.assertEqual(rec.width, 3)
+        self.assertEqual(rec.height, 4)
+
+        # keywords arguments all through
+        rec.update(id=8, width=40, height=12, x=2, y=4)
+        self.assertEqual(rec.x, 2)
+        self.assertEqual(rec.y, 4)
+        self.assertEqual(rec.id, 8)
+        self.assertEqual(rec.width, 40)
+        self.assertEqual(rec.height, 12)
+
+    def test_update_to_raise_exceptions_t(self):
+        """
+        test update method to raise TypeError
+        """
+
+        rect = Rectangle(1, 2, 3, 4, 5)
+
+        # tests with strings
+        with self.assertRaisesRegex(TypeError, 'width must be an integer'):
+            rect.update(id=2, width="2", x=5)
+        with self.assertRaisesRegex(ValueError, 'height must be > 0'):
+            rect.update(2, 3, -9)
+        with self.assertRaisesRegex(TypeError, 'x must be an integer'):
+            rect.update(2, 3, 9, '9')
+        with self.assertRaisesRegex(TypeError, 'y must be an integer'):
+            rect.update(2, 3, 9, 9, '2')
+
+        # tests with lists
+        with self.assertRaisesRegex(TypeError, 'width must be an integer'):
+            rect.update(2, [2], 5)
+        with self.assertRaisesRegex(TypeError, 'height must be an integer'):
+            rect.update(2, 3, [4])
+        with self.assertRaisesRegex(TypeError, 'x must be an integer'):
+            rect.update(2, 3, 9, [9, 3, 9])
+        with self.assertRaisesRegex(TypeError, 'y must be an integer'):
+            rect.update(2, 3, 9, 9, [1, 4, 4.6])
+
+        #tests with tuples
+        with self.assertRaisesRegex(TypeError, 'width must be an integer'):
+            rect.update(2, (2, 4), 5)
+        with self.assertRaisesRegex(TypeError, 'height must be an integer'):
+            rect.update(2, 3, (9,))
+        with self.assertRaisesRegex(TypeError, 'x must be an integer'):
+            rect.update(2, 3, 9, (0, 2))
+        with self.assertRaisesRegex(TypeError, 'y must be an integer'):
+            rect.update(2, 3, 9, 9, (2, 8))
