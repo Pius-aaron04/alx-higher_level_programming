@@ -149,3 +149,13 @@ class Rectangle(Base):
                 if s_key in self.__dict__:
                     self.validate_value(key, value)
                     setattr(self, s_key, value)
+
+    def to_dictionary(self):
+        """
+        returns a dictionary representation of instance
+        """
+
+        dict_ = {'id': self.id, 'width': self.width,
+                 'height': self.height, 'x': self.x, 'y': self.y}
+
+        return dict_

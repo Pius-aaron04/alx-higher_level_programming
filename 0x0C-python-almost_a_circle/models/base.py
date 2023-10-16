@@ -4,6 +4,9 @@ contains definition for base class.
 """
 
 
+import json
+
+
 class Base:
     """
     Base class for this project.
@@ -17,8 +20,91 @@ class Base:
         initializes instance attributes.
         """
 
-        if id != None:
+        if id is not None:
             self.id = id
         else:
             Base.__nb_objects += 1
             self.id = Base.__nb_objects
+
+    def validate_value(self, name, value):
+        """
+        validates value.
+        """
+
+        if type(value) is not int:
+            raise TypeError("{} must be an integer".format(name))
+        if name in ('width', 'height'):
+            if value <= 0:
+                raise ValueError("{} must be > 0".format(name))
+        elif value < 0:
+            raise ValueError("{} must be >= 0".format(name))
+
+    @staticmethod
+    def to_json_string(list_dictionaries):
+        """
+        converts dictionaries to json string
+        """
+
+        json_string = json.dumps(list_dictionaries)
+
+        # for dict_ in list_dictionaries:
+        #     json_string += '{'
+        #     # loops through each dict
+        #     for key, value in dict_.items():
+        #         if key != tuple(dict_.keys())[-1]:
+        #             json_string += '"{}": {}, '.format(key, value)
+        #         else:
+        #             json_string += '"{}": {}'.format(key, value)
+        #     if dict_ != list_dictionaries[-1]:
+        #         json_string += '}, '
+        #     else:
+        #         json_string += '}'
+        # json_string += ']'
+        return json_string
+
+    @classmethod
+    def save_to_file(cls, list_objs):
+        """
+        saves json string representation of list_objs to a file.
+        """
+
+        objs = []
+        if list_objs is None:
+            list_objs = []
+        for obj in list_objs:
+            objs.append(obj.to_dictionary())
+
+        print(objs)
+        string = cls.to_json_string(objs)
+        # opens a file with class name
+        with open("{}.json".format(cls.__name__), 'w', encoding='utf-8') as f:
+            f.write(string)
+
+    @staticmethod
+    def from_json_string(json_string):
+        """
+        extacts data from json string.
+        """
+
+        return json.loads(json_string)
+
+    @classmethod
+    def create(cls, **dictionary):
+        """
+        creates a new instance with atrributes
+        provided in the dictionary
+        """
+
+        new_instance = Rectangle(1, 2)
+        new_instance.update(dictionary)
+        return new_instance
+
+    @classmethod
+    def load_from_file(cls):
+        """
+        loads json object from file
+        """
+
+        with open("{}.json".format(cls.__name__, 'r', encoding='utf-8')) as f:
+            instance = json.load(f)
+        return instance

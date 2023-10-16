@@ -55,7 +55,8 @@ class Square(Rectangle):
 
         if args:
             try:
-                for name, value in zip(('id', 'width', 'height', 'x', 'y'), args):
+                for name, value in zip(('id', 'width', 'height', 'x', 'y'),
+                                       args):
                     super().validate_value(name, value)
                 self.id = args[0]
                 self.size = args[1]
@@ -81,4 +82,4 @@ class Square(Rectangle):
 
         dict_ = {'id': self.id, 'size': self.width, 'x': self.x, 'y': self.y}
 
-        return(dict_)
+        return dict_
