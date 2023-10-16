@@ -18,7 +18,6 @@ class Square(Rectangle):
         Initializes class attributes.
         """
 
-        super().validate_value('size', size)
         super().__init__(size, size, x, y, id)
 
     def __str__(self):
@@ -55,9 +54,6 @@ class Square(Rectangle):
 
         if args:
             try:
-                for name, value in zip(('id', 'width', 'height', 'x', 'y'),
-                                       args):
-                    super().validate_value(name, value)
                 self.id = args[0]
                 self.size = args[1]
                 self.x = args[2]

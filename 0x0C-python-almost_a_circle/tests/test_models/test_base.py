@@ -3,6 +3,8 @@ this module contain unit tests
 """
 
 import unittest
+from unittest.mock import patch
+import io
 from models.base import Base
 
 

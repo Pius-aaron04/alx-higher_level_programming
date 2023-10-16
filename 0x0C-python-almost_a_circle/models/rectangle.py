@@ -133,6 +133,9 @@ class Rectangle(Base):
 
         if args:
             try:
+                for name, value in zip(('width', 'height', 'x', 'y'),
+                                       args[1:]):
+                    self.validate_value(name, value)
                 self.id = args[0]
                 self.width = args[1]
                 self.height = args[2]
@@ -147,7 +150,8 @@ class Rectangle(Base):
                 else:
                     s_key = key
                 if s_key in self.__dict__:
-                    self.validate_value(key, value)
+                    if s_key != 'id':
+                        self.validate_value(key, value)
                     setattr(self, s_key, value)
 
     def to_dictionary(self):

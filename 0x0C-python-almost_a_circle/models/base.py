@@ -33,9 +33,8 @@ class Base:
 
         if type(value) is not int:
             raise TypeError("{} must be an integer".format(name))
-        if name in ('width', 'height'):
-            if value <= 0:
-                raise ValueError("{} must be > 0".format(name))
+        if name in ('width', 'height') and value <= 0:
+            raise ValueError("{} must be > 0".format(name))
         elif value < 0:
             raise ValueError("{} must be >= 0".format(name))
 
@@ -45,21 +44,23 @@ class Base:
         converts dictionaries to json string
         """
 
-        json_string = json.dumps(list_dictionaries)
+        if list_dictionaries is None:
+            return '[]'
+        json_string = '['
 
-        # for dict_ in list_dictionaries:
-        #     json_string += '{'
-        #     # loops through each dict
-        #     for key, value in dict_.items():
-        #         if key != tuple(dict_.keys())[-1]:
-        #             json_string += '"{}": {}, '.format(key, value)
-        #         else:
-        #             json_string += '"{}": {}'.format(key, value)
-        #     if dict_ != list_dictionaries[-1]:
-        #         json_string += '}, '
-        #     else:
-        #         json_string += '}'
-        # json_string += ']'
+        for dict_ in list_dictionaries:
+            json_string += '{'
+            # loops through each dict
+            for key, value in dict_.items():
+                if key != tuple(dict_.keys())[-1]:
+                    json_string += '"{}": {}, '.format(key, value)
+                else:
+                    json_string += '"{}": {}'.format(key, value)
+            if dict_ != list_dictionaries[-1]:
+                json_string += '}, '
+            else:
+                json_string += '}'
+        json_string += ']'
         return json_string
 
     @classmethod
@@ -95,8 +96,14 @@ class Base:
         provided in the dictionary
         """
 
-        new_instance = Rectangle(1, 2)
-        new_instance.update(dictionary)
+        from models.rectangle import Rectangle
+        from models.square import Square
+
+        if cls.__name__ == 'Rectangle':
+            new_instance = Rectangle(1, 1)
+        elif cls.__name__ == 'Square':
+            new_instance = Square(1)
+        new_instance.update(**dictionary)
         return new_instance
 
     @classmethod
@@ -105,6 +112,10 @@ class Base:
         loads json object from file
         """
 
-        with open("{}.json".format(cls.__name__, 'r', encoding='utf-8')) as f:
-            instance = json.load(f)
-        return instance
+        try:
+            with open("{}.json".format(cls.__name__, 'r',
+                      encoding='utf-8')) as f:
+                data = f.read()
+        except FileNotFoundError:
+            return []
+        return json.loads(data)
