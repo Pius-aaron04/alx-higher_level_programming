@@ -7,6 +7,7 @@ from unittest.mock import patch
 import io
 import models.square
 from models.square import Square
+import os
 
 
 class TestSquareClass(unittest.TestCase):
@@ -456,6 +457,23 @@ class TestSquareClass(unittest.TestCase):
                          '{"id": 98, "size": 2, "x": 6, "y": ' +
                          '7}]')
 
+        Square.save_to_file([])
+        with open("Square.json", 'r', encoding='utf-8') as f:
+            string = f.read()
+        self.assertEqual(string, '[]')
+        r1.save_to_file(None)
+
+        with open("Square.json", 'r', encoding='utf-8') as f:
+            string = f.read()
+        self.assertEqual(string, '[]')
+
+        r = Square(1)
+        Square.save_to_file([r1])
+        with open("Square.json", 'r', encoding='utf-8') as f:
+            string = f.read()
+        self.assertEqual(string, Square.to_json_string([r1.to_dictionary()]
+                                                       ))
+
     def test_from_json_string(self):
         """
         tests from json string method.
@@ -477,3 +495,25 @@ class TestSquareClass(unittest.TestCase):
 
         s = Square.to_json_string(None)
         self.assertEqual(s, '[]')
+
+    def test_load_from_file(self):
+        """
+        tests load from file method
+        """
+
+        r1 = Square(2, 3, id=90)
+        Square.save_to_file([r1])
+
+        obj = Square.load_from_file()
+
+        self.assertEqual(str(r1), str(obj[0]))
+
+    def from_load_from_non_existing_file(self):
+        """
+        tests loading from non exisiting file"""
+
+        if os.path("Square.json"):
+            os.remove("Square.json")
+        data = Square.load_from_file()
+
+        self.assertEqual(data, [])

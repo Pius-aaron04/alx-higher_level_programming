@@ -6,6 +6,7 @@ import unittest
 from unittest.mock import patch
 import io
 from models.rectangle import Rectangle
+import os
 
 
 class TestClassRectangle(unittest.TestCase):
@@ -427,6 +428,23 @@ class TestClassRectangle(unittest.TestCase):
                          ' "x": 6, "y": 7}, ' +
                          '{"id": 98, "width": 2, "height": 5, "x": 6, "y": ' +
                          '7}]')
+        r1.save_to_file([])
+
+        with open("Rectangle.json", 'r', encoding='utf-8') as f:
+            string = f.read()
+        self.assertEqual(string, '[]')
+        r1.save_to_file(None)
+
+        with open("Rectangle.json", 'r', encoding='utf-8') as f:
+            string = f.read()
+        self.assertEqual(string, '[]')
+
+        r = Rectangle(1, 2)
+        Rectangle.save_to_file([r1])
+        with open("Rectangle.json", 'r', encoding='utf-8') as f:
+            string = f.read()
+        self.assertEqual(string, Rectangle.to_json_string([r1.to_dictionary()]
+                                                          ))
 
     def test_from_json_string(self):
         """
@@ -453,3 +471,24 @@ class TestClassRectangle(unittest.TestCase):
         s = Rectangle.to_json_string(None)
         self.assertEqual(s, '[]')
 
+    def test_load_from_file(self):
+        """
+        tests load from file method
+        """
+
+        r1 = Rectangle(2, 3, id=90)
+        Rectangle.save_to_file([r1])
+
+        obj = Rectangle.load_from_file()
+
+        self.assertEqual(str(r1), str(obj[0]))
+
+    def from_load_from_non_existing_file(self):
+        """
+        tests loading from non exisiting file"""
+
+        if os.path("Rectangle.json"):
+            os.remove("Rectangle.json")
+        data = Rectangle.load_from_file()
+
+        self.assertEqual(data, [])
