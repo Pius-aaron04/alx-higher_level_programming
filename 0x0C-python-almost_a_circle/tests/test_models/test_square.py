@@ -466,3 +466,14 @@ class TestSquareClass(unittest.TestCase):
         py_obj = self.s1.from_json_string(json_obj)
 
         self.assertEqual(squares, py_obj)
+
+    def test_to_json_empty_None(self):
+        """
+        test to json method with None or empty list as argument.
+        """
+
+        s = Square.to_json_string([])
+        self.assertEqual(s, '[]')
+
+        s = Square.to_json_string(None)
+        self.assertEqual(s, '[]')
