@@ -455,3 +455,14 @@ class TestSquareClass(unittest.TestCase):
                          ' "x": 6, "y": 7}, ' +
                          '{"id": 98, "size": 2, "x": 6, "y": ' +
                          '7}]')
+
+    def test_from_json_string(self):
+        """
+        tests from json string method.
+        """
+
+        squares = [self.s1.to_dictionary(), self.s3.to_dictionary()]
+        json_obj = self.s1.to_json_string(squares)
+        py_obj = self.s1.from_json_string(json_obj)
+
+        self.assertEqual(squares, py_obj)
