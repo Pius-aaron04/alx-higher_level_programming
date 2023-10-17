@@ -46,21 +46,8 @@ class Base:
 
         if list_dictionaries is None:
             return '[]'
-        json_string = '['
+        json_string = json.dumps(list_dictionaries)
 
-        for dict_ in list_dictionaries:
-            json_string += '{'
-            # loops through each dict
-            for key, value in dict_.items():
-                if key != tuple(dict_.keys())[-1]:
-                    json_string += '"{}": {}, '.format(key, value)
-                else:
-                    json_string += '"{}": {}'.format(key, value)
-            if dict_ != list_dictionaries[-1]:
-                json_string += '}, '
-            else:
-                json_string += '}'
-        json_string += ']'
         return json_string
 
     @classmethod
@@ -75,7 +62,6 @@ class Base:
         for obj in list_objs:
             objs.append(obj.to_dictionary())
 
-        print(objs)
         string = cls.to_json_string(objs)
         # opens a file with class name
         with open("{}.json".format(cls.__name__), 'w', encoding='utf-8') as f:
@@ -120,4 +106,8 @@ class Base:
                 data = f.read()
         except FileNotFoundError:
             return []
-        return json.loads(data)
+        data = cls.from_json_string(data)
+        instances = []
+        for dict_ in data:
+            instances.append(cls.create(**dict_))
+        return instances
