@@ -433,7 +433,7 @@ class TestClassRectangle(unittest.TestCase):
         with open("Rectangle.json", 'r', encoding='utf-8') as f:
             string = f.read()
         self.assertEqual(string, '[]')
-        r1.save_to_file(None)
+        Rectangle.save_to_file(None)
 
         with open("Rectangle.json", 'r', encoding='utf-8') as f:
             string = f.read()
