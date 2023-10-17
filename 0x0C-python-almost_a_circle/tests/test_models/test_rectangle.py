@@ -433,8 +433,8 @@ class TestClassRectangle(unittest.TestCase):
         with open("Rectangle.json", 'r', encoding='utf-8') as f:
             string = f.read()
         self.assertEqual(string, '[]')
-        Rectangle.save_to_file(None)
 
+        Rectangle.save_to_file(None)
         with open("Rectangle.json", 'r', encoding='utf-8') as f:
             string = f.read()
         self.assertEqual(string, '[]')
@@ -492,3 +492,26 @@ class TestClassRectangle(unittest.TestCase):
         data = Rectangle.load_from_file()
 
         self.assertEqual(data, [])
+
+    def test_save_to_file_csv(self):
+        """
+        tests save to file method.
+        """
+
+        r1 = Rectangle(2, 5, 6, 7, 98)
+
+        r2 = r1.create(**r1.to_dictionary())
+
+        r1.save_to_file_csv([r1, r2])
+
+        with open("Rectangle.json", 'r', encoding='utf-8') as f:
+            string = f.read()
+
+    def test_load_from_file_csv(self):
+        """
+        loads instances from csv file
+        """
+        r1 = Rectangle(2, 3, 6)
+        Rectangle.save_to_file_csv([r1])
+        objs = Rectangle.load_from_file_csv()
+        self.assertEqual(str(objs[0]), str(r1))

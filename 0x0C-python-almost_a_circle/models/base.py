@@ -3,7 +3,7 @@
 contains definition for base class.
 """
 
-
+import csv
 import json
 
 
@@ -111,3 +111,41 @@ class Base:
         for dict_ in data:
             instances.append(cls.create(**dict_))
         return instances
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """
+        Saves objs to a csv file
+        """
+
+        with open("{}.csv".format(cls.__name__), 'w', encoding='utf-8') as f:
+            csv_write = csv.writer(f)
+            for obj_ in list_objs:
+                csv_write.writerow(list(obj_.to_dictionary().values()))
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """
+        loads attribute info from csv file
+        """
+
+        from models.rectangle import Rectangle
+        from models.square import Square
+        if cls.__name__ == 'Rectangle':
+            inst = Rectangle
+        elif cls.__name__ == 'Square':
+            inst = Square
+        try:
+            with open("{}.csv".format(cls.__name__), 'r',
+                      encoding='utf-8') as f:
+                reader = csv.reader(f)
+                objs = []
+                for row in reader:
+                    instance = inst(1, 2)
+                    attributes = [int(s) for s in row]
+                    instance.update(*attributes)
+                    objs.append(instance)
+        except FileNotFoundError:
+            return []
+
+        return objs
