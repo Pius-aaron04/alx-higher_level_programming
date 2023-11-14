@@ -12,7 +12,9 @@ def say_my_name(first_name, last_name=""):
         raise TypeError("first_name must be a string")
     elif type(last_name) is not str:
         raise TypeError("last_name must be a string")
-    if len(first_name) == 0:
-        print(last_name)
+    if len(first_name) == 0 and len(last_name) != 0:
+        print('My name is', last_name)
+    elif len(first_name) == 0 and len(last_name) == 0:
+        print()
     else:
-        print(first_name, last_name)
+        print('My name is', first_name, last_name)
