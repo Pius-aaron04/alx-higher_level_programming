@@ -87,10 +87,7 @@ class Base:
         from models.rectangle import Rectangle
         from models.square import Square
 
-        if cls.__name__ == 'Rectangle':
-            new_instance = Rectangle(1, 1)
-        elif cls.__name__ == 'Square':
-            new_instance = Square(1)
+        new_instance = cls(1, 2)
         new_instance.update(**dictionary)
         return new_instance
 
@@ -131,17 +128,13 @@ class Base:
 
         from models.rectangle import Rectangle
         from models.square import Square
-        if cls.__name__ == 'Rectangle':
-            inst = Rectangle
-        elif cls.__name__ == 'Square':
-            inst = Square
         try:
             with open("{}.csv".format(cls.__name__), 'r',
                       encoding='utf-8') as f:
                 reader = csv.reader(f)
                 objs = []
                 for row in reader:
-                    instance = inst(1, 2)
+                    instance = cls(1, 2)
                     attributes = [int(s) for s in row]
                     instance.update(*attributes)
                     objs.append(instance)
