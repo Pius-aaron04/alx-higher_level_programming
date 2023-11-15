@@ -6,7 +6,7 @@
 	);
 
 	-- insert sample rows
-	INSERT INTO second_table
+	INSERT INTO IF NOT EXISTS second_table
 	VALUES
 	(1, 'John', 10),
 	(2, 'Alex', 3),
