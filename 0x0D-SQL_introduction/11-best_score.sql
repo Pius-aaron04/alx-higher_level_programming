@@ -1,4 +1,4 @@
 -- displays records with score greater than or equal 10
-select score, name
-from second_table
-where score >= 10;
+SELECT score, name
+FROM second_table
+WHERE score >= 10;
