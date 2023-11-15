@@ -8,7 +8,7 @@
 	-- insert sample rows
 	INSERT INTO second_table
 	VALUES
-	(1, 'Jonh', 10),
+	(1, 'John', 10),
 	(2, 'Alex', 3),
 	(3, 'Alex', 14),
 	(4, 'Alex', 8);
