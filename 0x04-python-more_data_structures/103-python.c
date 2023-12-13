@@ -44,7 +44,8 @@ void print_python_bytes(PyObject *p)
 	if (bytes_size > 10)
 		bytes_size = 10;
 	printf("  first %ld bytes: ", bytes_size);
-
+	printf("%x", data);
+/*
 	for (i = 0; i < bytes_size; i++)
 	{
 		if (i == bytes_size - 1)
@@ -52,4 +53,5 @@ void print_python_bytes(PyObject *p)
 		else
 			printf("%x ", data[i]);
 	}
+	*/
 }
