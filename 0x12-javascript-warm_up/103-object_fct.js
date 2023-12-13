@@ -4,9 +4,10 @@ const myObject = {
   value: 12
 };
 console.log(myObject);
-myObject.incr = function incr () {
-    myObject.value += 1;
+function increment () {
+  myObject.value += 1;
 }
+myObject.incr = Object.assign(function () {}, increment);
 myObject.incr();
 console.log(myObject);
 myObject.incr();
