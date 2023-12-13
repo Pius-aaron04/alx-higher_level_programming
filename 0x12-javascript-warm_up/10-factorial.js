@@ -4,15 +4,11 @@ const { argv } = require('process');
 const number = Number(argv[2]);
 
 function factorial (num) {
-  if (isNaN(number) || number === 0) {
-    console.log('1');
+  if (isNaN(num) || num === 0) {
+    return 1;
   } else {
-    let factorial = 1;
-    for (num; num !== 1; num--) {
-      factorial *= num;
-    }
-    console.log(factorial);
+    return num * factorial(num - 1);
   }
 }
 
-factorial(number);
+console.log(factorial(number));
