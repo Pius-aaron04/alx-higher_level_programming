@@ -4,9 +4,9 @@ function nbOccurences (list, searchElement) {
   let occurrences = 0;
   list.forEach((element) => {
     if (element === searchElement) {
-	    occurrences += 1;
+      occurrences += 1;
     }
-  })
+  });
   return occurrences;
 }
 
