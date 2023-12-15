@@ -1,12 +1,16 @@
 #!/usr/bin/python3
 """
-List all statesin cities table.
+List all cities in specified state.
 """
 import sys
 import MySQLdb
 
 
 def main():
+    """
+    main function for the queries.
+    """
+
     username, password, database, state_name = sys.argv[1:]
     db = MySQLdb.connect(host='localhost', user=username, passwd=password,
                          db=database,  port=3306)
