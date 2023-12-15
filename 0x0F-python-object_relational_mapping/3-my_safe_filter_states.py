@@ -6,7 +6,7 @@ Accesses lists of states in database
 import sys
 import MySQLdb
 
-def main():
+if __name__ == '__main__':
     username, password, database, state_name = sys.argv[1:]
 
     db = MySQLdb.connect(host='localhost', user=username, passwd=password,
@@ -19,6 +19,3 @@ def main():
         print(value)
     cur.close()
     db.close()
-
-if __name__ == '__main__':
-    main()
