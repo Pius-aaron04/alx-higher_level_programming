@@ -19,3 +19,5 @@ data = cur.fetchall()
 
 for value in data:
     print(value)
+cur.close()
+db.close()

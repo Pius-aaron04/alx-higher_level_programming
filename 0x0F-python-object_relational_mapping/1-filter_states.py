@@ -20,3 +20,5 @@ data = cur.fetchall()
 for value in data:
     if value[1].startswith('N'):
         print(value)
+cur.close()
+db.close()
