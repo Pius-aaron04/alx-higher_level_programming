@@ -14,8 +14,9 @@ username, password, database = argv
 db = MySQLdb.connect(host='localhost', user=username, passwd=password,
                      db=database)
 cur = db.cursor()
-cur.execute("SELECT * FROM states ORDER BY id ASC")
+cur.execute("SELECT * FROM states ORDER BY id")
 data = cur.fetchall()
 
 for value in data:
-    print(value)
+    if value[1].startswith('N'):
+        print(value)
