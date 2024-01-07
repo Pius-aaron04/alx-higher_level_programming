@@ -3,12 +3,13 @@
 
 import urllib.request
 
-req = urllib.request.Request('https://alx-intranet.hbtn.io/status')
+if __name__ == '__main__':
+    req = urllib.request.Request('https://alx-intranet.hbtn.io/status')
 
-with urllib.request.urlopen(req) as response:
-    content = response.read()
+    with urllib.request.urlopen(req) as response:
+        content = response.read()
 
-print("Body response:")
-print("    - type: {}".format(type(content)))
-print("    - content: {}".format(content))
-print("    - utf8 content: {}".format(content.decode('utf8')))
+    print("Body response:")
+    print("    - type: {}".format(type(content)))
+    print("    - content: {}".format(content))
+    print("    - utf8 content: {}".format(content.decode('utf8')))
