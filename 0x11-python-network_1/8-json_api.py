@@ -7,5 +7,13 @@ import requests
 import sys
 
 if __name__ == '__main__':
-    r = requests.post('http://0.0.0.0:5000/search_user', data={sys.argv[1]: ""})
-    print(r.text)
+    if len(sys.argv):
+        print("No result")
+    try:
+        json = r.json()
+        if json:
+            print(json)
+        else:
+            print("No result")
+    except ValueError:
+        print("Not a valid JSON")
