@@ -16,7 +16,6 @@ if __name__ == '__main__':
     try:
         json = r.json()
         if json:
-            json = dict(json)
             print('[{}] {}'.fomart(json['id'], json['name']))
         else:
             print("No result")
