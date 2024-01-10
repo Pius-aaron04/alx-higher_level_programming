@@ -10,13 +10,8 @@ if __name__ == '__main__':
     if len(sys.argv) < 2:
         print("No result")
     else:
-        data = sys.argv[1].split('=')
-        if len(data) == 2:
-            data = {data[0]: data[1]}
-        else:
-            data = {data[0]: ""}
         r = requests.post('http://0.0.0.0:5000/search_user',
-                          data=data)
+                data={'q': sys.argv[1]})
         try:
             json = r.json()
             if json:
