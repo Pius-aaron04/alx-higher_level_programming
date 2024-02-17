@@ -5,7 +5,7 @@
  */
 
 const request = require('request');
-const { argv } = rquire('process');
+const { argv } = require('process');
 
 request.get(argv[2], (err, response, body) => {
   if (err) {
