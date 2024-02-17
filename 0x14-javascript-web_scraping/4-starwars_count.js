@@ -5,10 +5,11 @@
  */
 
 const request = require('request');
+const { argv } = rquire('process');
 
-request.get('https://swapi-api.alx-tools.com/api/films/', (err, response, body) => {
+request.get(argv[2], (err, response, body) => {
   if (err) {
-    console.log(err);
+    console.error(err);
   } else if (body) {
     const films = JSON.parse(body).results;
     let count = 0;
